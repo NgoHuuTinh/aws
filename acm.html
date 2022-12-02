@@ -1,0 +1,64 @@
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AWS Certificate Manager (ACM)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="public/css/bootstrap.css" rel="stylesheet">
+    <link href="public/css/base.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="subject">
+            <h2 class="text-start mt-5 mb-4">Setting ACM</h2>
+            <hr/>
+            <div class="mb-5">
+                <span class="fw-bold">※Setting ACM by area setting EC2</span><br/>
+                <i>If you set EC2 in Singapore, you will set ACM in "ap-southeast-1" area</i>
+            </div>
+        </div>
+        <div class="content">
+            <span class="label-content">Import certificate</span>
+            <hr/>
+            <img src="./public/img/acm/input_certificate_details.png" alt="input_certificate_details">
+        </div>
+        <div class="content">
+            <span class="label-content">Re-import certificate</span><br/>
+            <hr/>
+            <i>If your certificate is about to expire, you need to prepare an extended certificate and perform this operation.</i>
+            <img src="./public/img/acm/re_input_certificate_details.png" alt="re-input_certificate_details">
+        </div>
+        <div class="content">
+            <span class="label-content">Config EC2 to apply ACM</span><br/>
+            <hr/>
+            <i>When updating the certificate, it is necessary to perform operations not only on AWS but also on EC2.</i><br/>
+            <div class="certificate">
+                <span class="fw-bold">Certificate body</span>
+                <ul>
+                    <li>Run the script to generate a self-signed dummy certificate and key for testing</li>
+                    <i><strong>sudo touch /etc/pki/tls/certs/server.crt</strong></i><br/>
+                    <i>※The specified file name matches the default that is assigned in the <strong>SSLCertificateFile</strong>.</i>
+                    <li class="pt-3">Change the value in the server.crt file with the value in the import certificate section.</li>
+                    <i><strong>sudo vim /etc/pki/tls/certs/server.crt</strong></i>
+                    <img src="./public/img/acm/localhost.crt.png" alt="localhost.crt">
+                </ul>
+                <i></i>
+            </div>
+            <div class="certificate">
+                <span class="fw-bold">Certificate private key</span>
+                <ul>
+                    <li>Change the value in the server.key file with the value in the import certificate section.</li>
+                    <i><strong>sudo vim /etc/pki/tls/private/server.key</strong></i>
+                </ul>
+            </div>
+            <div class="certificate">
+                <span class="fw-bold">Restart Apache</span>
+                <i><strong>sudo systemctl restart httpd</strong></i>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>>
